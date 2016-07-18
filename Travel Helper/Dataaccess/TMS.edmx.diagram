@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6283d8ea658c4da49f366ab884751c4f" Name="Diagram1">
+        <EntityTypeShape EntityType="TMSModel.Bus" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.BusCompany" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.BusSeatInfo" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.hotelBookingInfo" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.HotelRoomInfo" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.Hotel" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.Location" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.SeatBookingInfo" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.User" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="TMSModel.FK_Bus_BusCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_Bus_Locations" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_Bus_Locations1" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_BusSeatInfos_Bus" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_BusCompany_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_SeatBookingInfos_BusSeatInfos" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_hotelBookingInfos_HotelRoomInfos" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_hotelBookingInfos_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_Hotels_Hotels" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_Hotels_Locations" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.FK_SeatBookingInfos_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

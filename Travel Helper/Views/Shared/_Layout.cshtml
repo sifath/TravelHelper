@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/home.css" rel="stylesheet" type="text/css" />
+    
+
+</head>
+<body>
+    <header>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="~/Home">Travel Help</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                        <li><a href="~/Search/SearchHotel">Hotel Booking</a></li>
+                            <li><a href="~/Search/SearchBus">Bus Ticket Buying</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other Services <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Service 1</a></li>
+                                    <li><a href="#">Service 2</a></li>
+                                    <li><a href="#">Service 3</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Service 4</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Service 5</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search a Location">
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            @if (Session["userid"] != null)
+                            {
+                                if (Session["accessLevel"].ToString() == "1")
+                                {
+                                    <li><a href="#">Booking Status</a></li>
+                                }
+                                else
+                                if (Session["accessLevel"].ToString() == "2")
+                                {
+                                    <li><a href="~/Busdashboard/Index">Bus Admin Panel</a></li>
+                                }
+                                else
+                                if (Session["accessLevel"].ToString() == "3")
+                                {
+                                    <li><a href="~/Hoteldashboard/Index">Hotel Admin Panel</a></li>
+                                }
+                                else
+                                if (Session["accessLevel"].ToString() == "9")
+                                {
+                                    <li><a href="~/Admin/Index">Admin Panel</a></li>
+                                }
+
+
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Session["userName"] <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Account Info</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="~/User/logout">Log Out</a></li>
+                                    </ul>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li><a href="~/User/Login">Log In</a></li>
+                                <li><a href="~/User/SignUp">Sign Up</a></li>
+                            }
+
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+
+
+
+    </header>
+
+
+
+            <!--<div class="container body-content">-->
+                <div>
+                    @RenderBody()
+                    <hr />
+       
+                    <footer>
+                        <p>&copy; @DateTime.Now.Year - Travel Help Bangladesh &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+                    </footer>
+                </div>
+    
+            <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+            <script src="~/Scripts/moment.min.js"></script>
+            <script src="~/Scripts/bootstrap.min.js"></script>
+            <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+            <script src="~/Scripts/site.js"></script>
+       
+</body>
+</html>

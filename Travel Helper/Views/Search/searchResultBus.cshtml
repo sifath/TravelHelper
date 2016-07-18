@@ -1,0 +1,71 @@
+﻿@model Travel_Helper.Dataaccess.Bus
+@using Travel_Helper.Dataaccess
+@{ 
+    TMSEntities context = new TMSEntities();
+}
+
+
+    <br><br><br>
+    
+    <div class="busListBContainer">
+     <h3>You Search Result For The Bus</h3>
+    <table class="busList">
+        @if(ViewBag.bus.Count>0)
+        {
+            <tr>
+                <th>Description</th>
+                <th>Avilable Seat</th>
+                <th>Fare</th>
+            </tr>
+           
+            foreach(Bus b in ViewBag.bus){
+                <tr class="bus">
+                    <td>
+                        @b.Name<br>
+                        @{var dep = from z in context.Locations
+                                      where z.ID == b.DepPlace
+                                      select z.LocationName;
+                            var des = from z in context.Locations
+                                      where z.ID == b.DestPlace
+                                      select z.LocationName;
+                            }
+                        <label>Route: </label>
+                        @dep.First()
+                        <label>to</label>
+                        @des.First()
+                        <br>
+                        <label>Departure Time: </label>
+                        @b.Time.ToLongDateString()
+                    </td>
+                    
+                    <td>
+                        @{ 
+                            var available = from z in context.BusSeatInfos
+                                            where z.Status == 0 && z.BusID==b.ID
+                                            select z;
+                        }
+                        @available.Count()
+                    </td>
+
+                    <td>
+                        <label class="rent">@b.SeatRent<span> tk</span></label>
+                        <br>
+                        <a href="~/Bus/buyTicket/@b.ID">Buy Ticket</a>
+                    </td>
+                </tr>
+
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <h2>No Bus Found for this Date and Location</h2>
+                    <a href="~/Search/SearchBus">Back To Search</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+        </div>
+<br><br><br><br><br><br>

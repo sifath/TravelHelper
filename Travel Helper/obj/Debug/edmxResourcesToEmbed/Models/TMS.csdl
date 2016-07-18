@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SeatRent" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="Time" Type="DateTime" Precision="7" />
+    <Property Name="DepPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DestPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BusCompany" Relationship="Self.FK_Bus_Bus" FromRole="Bus" ToRole="BusCompany" />
+    <NavigationProperty Name="BusSeatInfos" Relationship="Self.FK_BusSeatInfos_Bus" FromRole="Bus" ToRole="BusSeatInfos" />
+  </EntityType>
+  <EntityType Name="BusCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdminId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_Bus" FromRole="BusCompany" ToRole="Bus" />
+    <NavigationProperty Name="User" Relationship="Self.FK_BusCompany_Users" FromRole="BusCompany" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="BusSeatInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SID" Type="Int32" />
+    <Property Name="BusID" Type="Int32" />
+    <Property Name="Status" Type="Byte" />
+    <NavigationProperty Name="Bus" Relationship="Self.FK_BusSeatInfos_Bus" FromRole="BusSeatInfos" ToRole="Bus" />
+  </EntityType>
+  <EntityType Name="hotelBookingInfo">
+    <Key>
+      <PropertyRef Name="BID" />
+    </Key>
+    <Property Name="BID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="HID" Type="Int32" Nullable="false" />
+    <Property Name="startDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="endDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="TranID" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="Byte" Nullable="false" />
+    <Property Name="RoomId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HotelRoomInfo" Relationship="Self.FK_hotelBookingInfos_HotelRoomInfos" FromRole="hotelBookingInfos" ToRole="HotelRoomInfos" />
+    <NavigationProperty Name="Transaction" Relationship="Self.FK_hotelBookingInfos_Hotels" FromRole="hotelBookingInfos" ToRole="Transactions" />
+    <NavigationProperty Name="Hotel" Relationship="Self.FK_hotelBookingInfos_Hotels2" FromRole="hotelBookingInfos" ToRole="Hotels" />
+    <NavigationProperty Name="User" Relationship="Self.FK_hotelBookingInfos_Users" FromRole="hotelBookingInfos" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="HotelRoomInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HotelId" Type="Int32" Nullable="false" />
+    <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rent" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="hotelBookingInfos" Relationship="Self.FK_hotelBookingInfos_HotelRoomInfos" FromRole="HotelRoomInfos" ToRole="hotelBookingInfos" />
+    <NavigationProperty Name="Hotel" Relationship="Self.FK_HotelRoomInfos_Hotels" FromRole="HotelRoomInfos" ToRole="Hotels" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdminId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="hotelBookingInfos" Relationship="Self.FK_hotelBookingInfos_Hotels2" FromRole="Hotels" ToRole="hotelBookingInfos" />
+    <NavigationProperty Name="HotelRoomInfos" Relationship="Self.FK_HotelRoomInfos_Hotels" FromRole="Hotels" ToRole="HotelRoomInfos" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Hotels_Hotels" FromRole="Hotels" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="PaymentMethod">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_PaymentMethods" FromRole="PaymentMethods" ToRole="Transactions" />
+  </EntityType>
+  <EntityType Name="SeatBookingInfo">
+    <Key>
+      <PropertyRef Name="BID" />
+    </Key>
+    <Property Name="BID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" Nullable="false" />
+    <Property Name="BusId" Type="Int32" Nullable="false" />
+    <Property Name="TranId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Transaction" Relationship="Self.FK_SeatBookingInfos_Transactions" FromRole="SeatBookingInfos" ToRole="Transactions" />
+    <NavigationProperty Name="User" Relationship="Self.FK_SeatBookingInfos_Users" FromRole="SeatBookingInfos" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MethodId" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="TranDate" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="hotelBookingInfos" Relationship="Self.FK_hotelBookingInfos_Hotels" FromRole="Transactions" ToRole="hotelBookingInfos" />
+    <NavigationProperty Name="PaymentMethod" Relationship="Self.FK_Transactions_PaymentMethods" FromRole="Transactions" ToRole="PaymentMethods" />
+    <NavigationProperty Name="SeatBookingInfos" Relationship="Self.FK_SeatBookingInfos_Transactions" FromRole="Transactions" ToRole="SeatBookingInfos" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UID" />
+    </Key>
+    <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NID" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccessLevel" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="BusCompanies" Relationship="Self.FK_BusCompany_Users" FromRole="Users" ToRole="BusCompany" />
+    <NavigationProperty Name="hotelBookingInfos" Relationship="Self.FK_hotelBookingInfos_Users" FromRole="Users" ToRole="hotelBookingInfos" />
+    <NavigationProperty Name="Hotels" Relationship="Self.FK_Hotels_Hotels" FromRole="Users" ToRole="Hotels" />
+    <NavigationProperty Name="SeatBookingInfos" Relationship="Self.FK_SeatBookingInfos_Users" FromRole="Users" ToRole="SeatBookingInfos" />
+  </EntityType>
+  <Association Name="FK_Bus_Bus">
+    <End Role="BusCompany" Type="Self.BusCompany" Multiplicity="1" />
+    <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BusCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bus">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusSeatInfos_Bus">
+    <End Role="Bus" Type="Self.Bus" Multiplicity="0..1" />
+    <End Role="BusSeatInfos" Type="Self.BusSeatInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BusSeatInfos">
+        <PropertyRef Name="BusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusCompany_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="BusCompany" Type="Self.BusCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="BusCompany">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hotelBookingInfos_HotelRoomInfos">
+    <End Role="HotelRoomInfos" Type="Self.HotelRoomInfo" Multiplicity="1" />
+    <End Role="hotelBookingInfos" Type="Self.hotelBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HotelRoomInfos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="hotelBookingInfos">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hotelBookingInfos_Hotels">
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="hotelBookingInfos" Type="Self.hotelBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transactions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="hotelBookingInfos">
+        <PropertyRef Name="TranID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hotelBookingInfos_Hotels2">
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="hotelBookingInfos" Type="Self.hotelBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotels">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="hotelBookingInfos">
+        <PropertyRef Name="HID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hotelBookingInfos_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="hotelBookingInfos" Type="Self.hotelBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="hotelBookingInfos">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelRoomInfos_Hotels">
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="HotelRoomInfos" Type="Self.HotelRoomInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotels">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HotelRoomInfos">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotels_Hotels">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="Hotels">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transactions_PaymentMethods">
+    <End Role="PaymentMethods" Type="Self.PaymentMethod" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentMethods">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="MethodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeatBookingInfos_Transactions">
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="1" />
+    <End Role="SeatBookingInfos" Type="Self.SeatBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transactions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SeatBookingInfos">
+        <PropertyRef Name="TranId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeatBookingInfos_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="SeatBookingInfos" Type="Self.SeatBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="SeatBookingInfos">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Buses" EntityType="Self.Bus" />
+    <EntitySet Name="BusCompanies" EntityType="Self.BusCompany" />
+    <EntitySet Name="BusSeatInfos" EntityType="Self.BusSeatInfo" />
+    <EntitySet Name="hotelBookingInfos" EntityType="Self.hotelBookingInfo" />
+    <EntitySet Name="HotelRoomInfos" EntityType="Self.HotelRoomInfo" />
+    <EntitySet Name="Hotels" EntityType="Self.Hotel" />
+    <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
+    <EntitySet Name="SeatBookingInfos" EntityType="Self.SeatBookingInfo" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Bus_Bus" Association="Self.FK_Bus_Bus">
+      <End Role="BusCompany" EntitySet="BusCompanies" />
+      <End Role="Bus" EntitySet="Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusSeatInfos_Bus" Association="Self.FK_BusSeatInfos_Bus">
+      <End Role="Bus" EntitySet="Buses" />
+      <End Role="BusSeatInfos" EntitySet="BusSeatInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusCompany_Users" Association="Self.FK_BusCompany_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BusCompany" EntitySet="BusCompanies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hotelBookingInfos_HotelRoomInfos" Association="Self.FK_hotelBookingInfos_HotelRoomInfos">
+      <End Role="HotelRoomInfos" EntitySet="HotelRoomInfos" />
+      <End Role="hotelBookingInfos" EntitySet="hotelBookingInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hotelBookingInfos_Hotels" Association="Self.FK_hotelBookingInfos_Hotels">
+      <End Role="Transactions" EntitySet="Transactions" />
+      <End Role="hotelBookingInfos" EntitySet="hotelBookingInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hotelBookingInfos_Hotels2" Association="Self.FK_hotelBookingInfos_Hotels2">
+      <End Role="Hotels" EntitySet="Hotels" />
+      <End Role="hotelBookingInfos" EntitySet="hotelBookingInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hotelBookingInfos_Users" Association="Self.FK_hotelBookingInfos_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="hotelBookingInfos" EntitySet="hotelBookingInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelRoomInfos_Hotels" Association="Self.FK_HotelRoomInfos_Hotels">
+      <End Role="Hotels" EntitySet="Hotels" />
+      <End Role="HotelRoomInfos" EntitySet="HotelRoomInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotels_Hotels" Association="Self.FK_Hotels_Hotels">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Hotels" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transactions_PaymentMethods" Association="Self.FK_Transactions_PaymentMethods">
+      <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeatBookingInfos_Transactions" Association="Self.FK_SeatBookingInfos_Transactions">
+      <End Role="Transactions" EntitySet="Transactions" />
+      <End Role="SeatBookingInfos" EntitySet="SeatBookingInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeatBookingInfos_Users" Association="Self.FK_SeatBookingInfos_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SeatBookingInfos" EntitySet="SeatBookingInfos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

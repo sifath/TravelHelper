@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "ViewRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Travel_Helper.Models.HotelRoom
+
+<div>
+    <h1>Details of Room: @Model.Room.RID</h1>
+    <p>Room Type: @Model.Room.RoomType</p>
+    <p>Rent: @Model.Room.Rent</p>
+
+    @if (Model.getStatus()) { 
+    <p>Current Status: Booked</p>
+    }
+    else {
+    <p>Current Status: Avaialbe <a href="~/Hoteldashboard/BookRoom/@Model.Room.ID" class="btn btn-default">Book Now</a></p>
+    }
+
+    <h2>Booking information</h2>
+
+    <table class="table table-stripped table-responsive">
+        <tr>
+            <th>Date</th>
+            <th>Booked For</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        @if (Model.Bookings.Count != 0) { 
+        foreach (Travel_Helper.Dataaccess.hotelBookingInfo info in Model.BookingHistory) { 
+            <tr>
+                <td>@info.BookingDate.ToLongDateString()</td>
+                @{Travel_Helper.Dataaccess.User u = Model.getBookingUser(Convert.ToInt32(info.BID));}
+                <td>@u.Name</td>
+                <td>@u.Phone</td>
+                <td>@u.Email</td>
+                <td><a href="~/Hoteldashboard/CancelBooking/@info.BID" class="btn btn-danger">Cancel</a></td>
+            </tr>
+            }
+        }
+    </table>
+</div>

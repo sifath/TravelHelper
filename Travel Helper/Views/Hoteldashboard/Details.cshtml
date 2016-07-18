@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Travel_Helper.Models.HotelModel
+<!-- Top content -->
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+
+            <h2>@Model.HotelEntity.Name</h2>
+            <p>@Model.HotelEntity.Address</p>
+           <p>Email: @Model.HotelEntity.Email, Phone: @Model.HotelEntity.Phone</p>
+
+            <table class="table table-stripped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Room Id</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                
+                </thead>
+                <tbody>
+                    @foreach (Travel_Helper.Models.HotelRoom room in Model.Rooms)
+                    {
+                        <tr>
+                            <td>@room.Room.RID</td>
+                            @if (!room.getStatus())
+                            {
+                                <td>Available</td>
+                            }
+                            else
+                            {
+                                <td>Booked</td>
+                            }
+                            <td><a href="~/Hoteldashboard/ViewRoom/@room.Room.ID">View Room Bookings</a></td>
+                            
+                        </tr>
+                    }
+                    
+                   
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>

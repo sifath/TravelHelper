@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Bus Owner Dashboard";
+}
+
+
+<div class="container">
+
+    
+
+    <div class="row">
+        <div class="col-md-4">
+            <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
+            <div id="sidebar" class="well sidebar-nav">
+                <h5>
+                    <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
+                    <small><b>Bus management</b></small>
+                </h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="~/Busdashboard/Create">Add a New Bus</a></li>
+                </ul>
+
+
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <!-- Content Here -->
+
+            <form class="form-inline" method="post">
+                <div class="form-group date">
+                    <label class="sr-only" for="start">Start</label>
+                    <input type="datetime" name="fromdate" class="form-control" id="fromdate" placeholder="From Date">
+                </div>
+                <div class="form-group date">
+                    <label class="sr-only" for="start">To</label>
+                    <input type="datetime" class="form-control" id="todate" name="todate" placeholder="To Date">
+                </div>
+        
+                <button type="submit" class="btn btn-default">Show Trips</button>
+            </form>
+            <table class="table table-stripped table-responsive">
+                    
+                <thead>
+                    <tr>
+                        <th>Bus Id</th>
+                        <th>Bus Name</th>
+                        <th>Start Time</th>
+                        <th>From</th>
+                        <th>Destination</th>
+                        <th>Total Seats</th>
+                        <th>Seats Avaialbe</th>
+                        <th>View Details</th>
+                    </tr>
+
+                    
+
+                </thead>
+                <tbody>
+
+                                        @foreach (System.Collections.Specialized.NameValueCollection bus in (ViewData["Buses"] as System.Collections.ArrayList)) {
+                                            <tr>
+                                                <td>@bus["bid"]</td>
+                                                <td>@bus["name"]</td>
+                                                <td>@bus["start"]</td>
+                                                <td>@bus["from"]</td>
+                                                <td>@bus["destination"]</td>
+                                                <td>@bus["totalseats"]</td>
+                                                <td>@bus["availalbeseats"]</td>
+                                                <td><a class="btn btn-default" href="/Busdashboard/Details/@bus["id"]/">View Details</a></td>
+                                            </tr>
+                    }
+                       
+                    
+                    
+
+                </tbody>
+            </table>
+    </div>
+    </div>
+</div>
+
+

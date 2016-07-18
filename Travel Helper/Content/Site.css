@@ -1,0 +1,93 @@
+﻿body{
+  
+}
+
+
+header {
+    min-height:50px;
+}
+
+
+.busSearch{
+    width:80%;
+    margin:auto;
+}
+
+.searchBox{
+    width:80%;
+    margin:auto;
+    //border:5px groove #0000ff; 
+    //background-color:#008080;
+    				border-radius: 15px;
+				box-shadow: 0 5px 17px 0 rgba(0,0,0,.6);
+    			vertical-align: top;
+    			//background-color:#27c1dd;
+    			//background-color: #500000;
+    			color: #333;
+    			//font-size: 20px;
+    text-align:center;
+}
+
+
+.date{
+    width:50%;
+    margin:auto;
+}
+
+.busListBContainer{
+        width:80%;
+    margin:auto;
+}
+
+.busList{
+    width:100%;
+    margin:auto;
+}
+
+
+
+.busList th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.busList th{
+    background-color:#989898;
+}
+
+.CreateHotel{
+    width: 60%;
+    margin:auto;
+}
+
+.btnPad{
+    margin-right:25px;
+    width:40px;
+    text-align:center;
+}
+
+.btnNormal{
+    margin-right:2px;
+    width:40px;
+    text-align:center;
+}
+
+
+.busSeatView{
+    width:80%;
+    margin:auto;
+    text-align:center;
+}
+
+
+.searchHotel{
+    width:60%;
+    margin:auto;
+    text-align:center;
+}
+
+.hotelList{
+    width:80%;
+    margin:auto;
+}

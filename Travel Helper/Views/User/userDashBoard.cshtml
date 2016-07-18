@@ -1,0 +1,58 @@
+﻿@using System.Collections
+@using Travel_Helper.Dataaccess
+@using Travel_Helper.Models
+@{
+    ViewBag.Title = "User Dashboard";
+    
+    ArrayList busbookings = (ArrayList)ViewData["bus"];
+    ArrayList hotelbookings = (ArrayList)ViewData["hotel"];
+    
+}
+
+ <div id="userDash">
+       <h2>Your Bus Bookings</h2>
+     <table class="table table-stipped table-responsive">
+         <tr>
+             <th>Bus Name</th>
+             <th>Bus Time</th>
+             <th>Seat id</th>
+             
+         </tr>
+
+         @foreach (SeatBookingInfo booking in busbookings) { 
+         
+             BusModel b = new BusModel(booking.BID);
+         
+            <tr>
+                <td>@b.BusEntity.Name</td>
+                <td>@b.BusEntity.Time.ToLongDateString()</td>
+                <td>@booking.SeatId</td>
+            </tr>
+         }
+     </table>
+     <h2>Your Hotel Bookings</h2>
+     <table class="table table-stipped table-responsive">
+         <tr>
+             <th>Hotel Name</th>
+             <th>Address</th>
+             <th>Date</th>
+             <th>Room id</th>
+
+         </tr>
+
+         @foreach (hotelBookingInfo booking in hotelbookings)
+         {
+             
+             HotelRoom r = new HotelRoom(booking.RoomId);
+             Hotel h =r.getHoltel(r.Room.ID);
+             
+             <tr>
+                 <td>@h.Name</td>
+                 <td>@h.Address</td>
+                 <td>@booking.BookingDate.ToShortDateString()</td>
+                 <td>@booking.RoomId</td>
+             </tr>
+         }
+     </table>
+ </div>
+

@@ -1,0 +1,62 @@
+﻿@using Travel_Helper.Dataaccess
+@{
+    ViewBag.Title = "Buy Bus ticket";
+    //ViewBag.busId
+    int busId = ViewBag.busId;
+    TMSEntities context = new TMSEntities();
+    var seats = from b in context.BusSeatInfos
+                where b.BusID == busId
+                select b;
+}
+<br><br>
+<h3 class="busSeatView">Select Your Seat</h3>
+<hr>
+ <div class="busSeatView">
+     
+ 
+     @{int index = 1; string cssClass = "btnNormal"; string disable = ""; string warning = "btn-primary"; string method = "busTicket"; int value = busId;}
+      @if (Session["userid"]!=null) {
+          foreach (BusSeatInfo s in seats)
+          {
+              if (s.Status==1)
+              {
+                  disable = "disabled";
+                  warning = "btn-warning";
+                  method = "buyTicket";
+                  value = busId;
+              }
+              else
+              {
+                  disable = "";
+                  warning = "btn-primary";
+                  method = "buy";
+                  value = s.ID;
+              }
+              //disabled
+              if (index % 2 == 0)
+              {
+                  cssClass = "btnPad";
+              }
+              else
+              {
+                  cssClass = "btnNormal";
+              }
+
+           
+            <a href="~/Bus/@method/@value"  class="btn @warning @cssClass" @disable>@s.SID</a>
+              if (index % 4 == 0)
+              {
+            <br><br>
+              }
+              index++;
+          }
+      }
+      else
+      {
+          <h2>Please Login To Buy A Ticket.... <br> 
+         <a href="~/User/Login"> Login</a>
+         </h2>
+      }
+        
+ </div>
+

@@ -1,0 +1,42 @@
+﻿@using Travel_Helper.Models
+@{
+    ViewBag.Title = "SearchHotelPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br>
+    <div class="container hotelList">
+        <h2>Hotels in @ViewBag.location</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Hotel Name</th>
+                    <th>Contact No.</th>
+                    <th>Address</th>
+                    <th>Room Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (HotelInfo i in ViewBag.otels)
+                {
+                <tr>
+                    <td>@i.Name</td>
+                    <td>@i.Phone</td>
+                    <td>@i.Address</td>
+                    @{ if (i.status == 0)
+                        {
+                            <td>Active</td>
+                            <td>@Html.ActionLink("Book Now", "BooKNow", "Hotel", new { id = @i.ID}, null)</td>
+                        }
+                        else {
+                            <td> Booked </td>
+                        }
+                        
+                        }
+                </tr>
+                        }
+            </tbody>
+        </table>
+    </div>

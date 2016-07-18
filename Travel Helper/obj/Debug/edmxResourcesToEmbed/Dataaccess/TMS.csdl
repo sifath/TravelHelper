@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SeatRent" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="DepPlace" Type="Int32" Nullable="false" />
+    <Property Name="DestPlace" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="BusCompany" Relationship="Self.FK_Bus_BusCompany" FromRole="Bus" ToRole="BusCompany" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_Bus_Locations" FromRole="Bus" ToRole="Locations" />
+    <NavigationProperty Name="Location1" Relationship="Self.FK_Bus_Locations1" FromRole="Bus" ToRole="Locations" />
+    <NavigationProperty Name="BusSeatInfos" Relationship="Self.FK_BusSeatInfos_Bus" FromRole="Bus" ToRole="BusSeatInfos" />
+  </EntityType>
+  <EntityType Name="BusCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdminId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_BusCompany" FromRole="BusCompany" ToRole="Bus" />
+    <NavigationProperty Name="User" Relationship="Self.FK_BusCompany_Users" FromRole="BusCompany" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="BusSeatInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BusID" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Bus" Relationship="Self.FK_BusSeatInfos_Bus" FromRole="BusSeatInfos" ToRole="Bus" />
+    <NavigationProperty Name="SeatBookingInfos" Relationship="Self.FK_SeatBookingInfos_BusSeatInfos" FromRole="BusSeatInfos" ToRole="SeatBookingInfos" />
+  </EntityType>
+  <EntityType Name="hotelBookingInfo">
+    <Key>
+      <PropertyRef Name="BID" />
+    </Key>
+    <Property Name="BID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="status" Type="Byte" Nullable="false" />
+    <Property Name="RoomId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HotelRoomInfo" Relationship="Self.FK_hotelBookingInfos_HotelRoomInfos" FromRole="hotelBookingInfos" ToRole="HotelRoomInfos" />
+    <NavigationProperty Name="User" Relationship="Self.FK_hotelBookingInfos_Users" FromRole="hotelBookingInfos" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="HotelRoomInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HotelId" Type="Int32" Nullable="false" />
+    <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rent" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="hotelBookingInfos" Relationship="Self.FK_hotelBookingInfos_HotelRoomInfos" FromRole="HotelRoomInfos" ToRole="hotelBookingInfos" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdminId" Type="Int32" Nullable="false" />
+    <Property Name="AreaId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Hotels_Hotels" FromRole="Hotels" ToRole="Users" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_Hotels_Locations" FromRole="Hotels" ToRole="Locations" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_Locations" FromRole="Locations" ToRole="Bus" />
+    <NavigationProperty Name="Buses1" Relationship="Self.FK_Bus_Locations1" FromRole="Locations" ToRole="Bus" />
+    <NavigationProperty Name="Hotels" Relationship="Self.FK_Hotels_Locations" FromRole="Locations" ToRole="Hotels" />
+  </EntityType>
+  <EntityType Name="SeatBookingInfo">
+    <Key>
+      <PropertyRef Name="BID" />
+    </Key>
+    <Property Name="BID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" Nullable="false" />
+    <Property Name="SeatId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="BusSeatInfo" Relationship="Self.FK_SeatBookingInfos_BusSeatInfos" FromRole="SeatBookingInfos" ToRole="BusSeatInfos" />
+    <NavigationProperty Name="User" Relationship="Self.FK_SeatBookingInfos_Users" FromRole="SeatBookingInfos" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UID" />
+    </Key>
+    <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NID" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccessLevel" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="BusCompanies" Relationship="Self.FK_BusCompany_Users" FromRole="Users" ToRole="BusCompany" />
+    <NavigationProperty Name="hotelBookingInfos" Relationship="Self.FK_hotelBookingInfos_Users" FromRole="Users" ToRole="hotelBookingInfos" />
+    <NavigationProperty Name="Hotels" Relationship="Self.FK_Hotels_Hotels" FromRole="Users" ToRole="Hotels" />
+    <NavigationProperty Name="SeatBookingInfos" Relationship="Self.FK_SeatBookingInfos_Users" FromRole="Users" ToRole="SeatBookingInfos" />
+  </EntityType>
+  <Association Name="FK_Bus_BusCompany">
+    <End Role="BusCompany" Type="Self.BusCompany" Multiplicity="1" />
+    <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BusCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bus">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bus_Locations">
+    <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+    <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bus">
+        <PropertyRef Name="DepPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bus_Locations1">
+    <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+    <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bus">
+        <PropertyRef Name="DestPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusSeatInfos_Bus">
+    <End Role="Bus" Type="Self.Bus" Multiplicity="1" />
+    <End Role="BusSeatInfos" Type="Self.BusSeatInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BusSeatInfos">
+        <PropertyRef Name="BusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusCompany_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="BusCompany" Type="Self.BusCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="BusCompany">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeatBookingInfos_BusSeatInfos">
+    <End Role="BusSeatInfos" Type="Self.BusSeatInfo" Multiplicity="1" />
+    <End Role="SeatBookingInfos" Type="Self.SeatBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BusSeatInfos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SeatBookingInfos">
+        <PropertyRef Name="SeatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hotelBookingInfos_HotelRoomInfos">
+    <End Role="HotelRoomInfos" Type="Self.HotelRoomInfo" Multiplicity="1" />
+    <End Role="hotelBookingInfos" Type="Self.hotelBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HotelRoomInfos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="hotelBookingInfos">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hotelBookingInfos_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="hotelBookingInfos" Type="Self.hotelBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="hotelBookingInfos">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotels_Hotels">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="Hotels">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotels_Locations">
+    <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+    <End Role="Hotels" Type="Self.Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Hotels">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeatBookingInfos_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="SeatBookingInfos" Type="Self.SeatBookingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="SeatBookingInfos">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Buses" EntityType="Self.Bus" />
+    <EntitySet Name="BusCompanies" EntityType="Self.BusCompany" />
+    <EntitySet Name="BusSeatInfos" EntityType="Self.BusSeatInfo" />
+    <EntitySet Name="hotelBookingInfos" EntityType="Self.hotelBookingInfo" />
+    <EntitySet Name="HotelRoomInfos" EntityType="Self.HotelRoomInfo" />
+    <EntitySet Name="Hotels" EntityType="Self.Hotel" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="SeatBookingInfos" EntityType="Self.SeatBookingInfo" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Bus_BusCompany" Association="Self.FK_Bus_BusCompany">
+      <End Role="BusCompany" EntitySet="BusCompanies" />
+      <End Role="Bus" EntitySet="Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bus_Locations" Association="Self.FK_Bus_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Bus" EntitySet="Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bus_Locations1" Association="Self.FK_Bus_Locations1">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Bus" EntitySet="Buses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusSeatInfos_Bus" Association="Self.FK_BusSeatInfos_Bus">
+      <End Role="Bus" EntitySet="Buses" />
+      <End Role="BusSeatInfos" EntitySet="BusSeatInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusCompany_Users" Association="Self.FK_BusCompany_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BusCompany" EntitySet="BusCompanies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeatBookingInfos_BusSeatInfos" Association="Self.FK_SeatBookingInfos_BusSeatInfos">
+      <End Role="BusSeatInfos" EntitySet="BusSeatInfos" />
+      <End Role="SeatBookingInfos" EntitySet="SeatBookingInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hotelBookingInfos_HotelRoomInfos" Association="Self.FK_hotelBookingInfos_HotelRoomInfos">
+      <End Role="HotelRoomInfos" EntitySet="HotelRoomInfos" />
+      <End Role="hotelBookingInfos" EntitySet="hotelBookingInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hotelBookingInfos_Users" Association="Self.FK_hotelBookingInfos_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="hotelBookingInfos" EntitySet="hotelBookingInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotels_Hotels" Association="Self.FK_Hotels_Hotels">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Hotels" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotels_Locations" Association="Self.FK_Hotels_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Hotels" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeatBookingInfos_Users" Association="Self.FK_SeatBookingInfos_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SeatBookingInfos" EntitySet="SeatBookingInfos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

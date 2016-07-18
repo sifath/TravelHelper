@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+@model Travel_Helper.Models.BusModel
+
+<!-- Top content -->
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+
+            <h2>Trip Details</h2>
+
+            <table class="table table-stripped table-responsive">
+                <tr>
+                    <td>Bus Name : </td>
+                    <td>@Model.BusEntity.Name</td>
+                </tr>
+                <tr>
+                    <td>From: </td>
+                    <td>@Model.BusEntity.Location.LocationName</td>
+                </tr>
+                <tr>
+                    <td>To : </td>
+                    <td>@Model.BusEntity.Location1.LocationName</td>
+                </tr>
+                <tr>
+                    <td>Time : @Model.BusEntity.Time.ToLongDateString()</td>
+                    <td></td>
+                </tr>
+                
+            </table>
+
+            <table class="table table-stripped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Seat Id</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                
+                </thead>
+                <tbody>
+                    @foreach (Travel_Helper.Dataaccess.BusSeatInfo seat in Model.seats)
+                    {
+                        <tr>
+                            <td>@seat.SID</td>
+                            @if (seat.Status == 0)
+                            {
+                                <td>Available</td>
+                                <td><a href="/Busdashboard/BookSeat/@seat.ID" class="btn btn-success">Book</a></td>
+                            }
+                            else
+                            {
+                                <td>Booked</td>
+                                <td><a href="/Busdashboard/CancelSeat/@seat.ID" class="btn btn-success">Cancel</a></td>
+                            }
+                            
+                        </tr>
+                    }
+                    
+                   
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>

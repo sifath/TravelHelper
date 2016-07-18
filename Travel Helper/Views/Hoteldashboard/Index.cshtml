@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Bus Owner Dashboard";
+}
+
+@model Travel_Helper.Models.HotelModel
+<div class="container">
+
+
+
+    <div class="row">
+        <h5>
+            <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
+            <small><b>Hotel management</b></small>
+        </h5>
+        <div class="col-md-4">
+            <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
+            <div id="sidebar" class="well sidebar-nav">
+                
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="~/Hoteldashboard/Edit/@Session["hotelId"]">Edit Hotel Info</a></li>
+                    <li><a href="~/Hoteldashboard/CreateRoom">Add a New Room</a></li>
+                    <li><a href="~/Hoteldashboard/Details/@Session["hotelId"]">Manage Bookings</a></li>
+                </ul>
+
+
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <!-- Content Here -->
+            <div class="jumbotron">
+
+                <h4>@Model.HotelEntity.Name</h4>
+                <p>@Model.HotelEntity.Address</p>
+                <p>Email: <a href="mailto:@Model.HotelEntity.Email">@Model.HotelEntity.Email</a></p>
+                <p>Phone: <a href="tel:@Model.HotelEntity.Phone">@Model.HotelEntity.Phone</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+

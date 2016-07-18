@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!-- Top content -->
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <h2>Create a Bus</h2>
+                    <div class="form-bottom">
+                        <form role="form" action="" method="post" class="login-form">
+                           
+                            <div class="form-group">
+                                <label class="sr-only" for="form-busname">Bus Name</label>
+                                <input type="text" name="form-busname" placeholder="Bus Name" class="form-seatrent form-control" id="form-busname" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-busid">Bus Id</label>
+                                <input type="text" name="form-busid" placeholder="Bus ID" class="form-busid form-control" id="form-busid" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-seatrent">Seat Rent</label>
+                                <input type="number" name="form-seatrent" placeholder="Ticket Price" class="form-seatrent form-control" id="form-seatrent" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-deprature">Deprature Place</label>
+                                <select class="form-control" name="form-deprature" required="required">
+                                    <option value="">Select Area</option>
+                                    @foreach (Travel_Helper.Dataaccess.Location l in (System.Collections.ArrayList)ViewData["areas"])
+                                    {
+                                        <option value="@l.ID">@l.LocationName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-destination">Destination Place</label>
+                                <select class="form-control" name="form-destination" required="required">
+                                    <option value="">Select Area</option>
+                                    @foreach (Travel_Helper.Dataaccess.Location l in (System.Collections.ArrayList)ViewData["areas"])
+                                    {
+                                        <option value="@l.ID">@l.LocationName</option>
+                                    }
+                                </select>                      
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-time">Deprature Time</label>
+                                <div class='input-group date'>
+                                    <input type="datetime" name="form-time" placeholder="Deprature Time" class="form-time form-control" id="form-time" required="required">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <label class="sr-only" for="form-seatcount">No of seats</label>
+                                <input type="number" name="form-seatcount" placeholder="No of seats" class="form-seatcount form-control" id="form-seatcount" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-desc">Additional Info</label>
+                                <textarea name="form-desc" rows="10" placeholder="Additional Info" class="form-desc form-control" id="form-desc" required="required"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn signIn">Create Bus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+

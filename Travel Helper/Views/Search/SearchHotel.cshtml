@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "SearchHotel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container searchHotel">
+    <h2>Search For Hotels</h2>
+    <form role="form" action="@Url.Action("SearchHotel", "Search")" method="post">
+        <div class=""  style="border:1px solid">
+            <br />
+            <div class="form-group">
+                @Html.DropDownList("LocationValue", (SelectList)ViewBag.Location, "Select Destination")
+            </div>
+            <br>
+            <label>Check in date: </label>
+            <div class='input-group date'>
+                
+                <input type="datetime" name="CheckIn" placeholder="Check In Date" class="form-time form-control" id="form-time" required="required">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+            <br>
+            <label>Check Out date: </label>
+            <div class='input-group date'>
+                
+                <input type="datetime" name="CheckOut" placeholder="Check Out Date" class="form-time form-control" id="form-time" required="required">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Search</button>
+            <br /> <br />
+        </div>
+    </form>
+</div>

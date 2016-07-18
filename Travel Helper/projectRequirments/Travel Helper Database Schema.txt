@@ -1,0 +1,58 @@
+1. Users
+------
+UID(PK), Phone(U), name(NN), email(U), address(), password(), NID(U), access_level(0=>INACTIVE, 1 => customer, 2=> Bus Owner, 3=> Hotel Owner, 9=>Admin)
+
+
+
+2. Hotels
+-----------------
+	Id(PK), name, phone, email, address, ownerName, Description, UserId(FK)
+
+
+
+3. hotelRoomInfos (roomType=> single,double, vip etc)
+--------------
+	id(PK), RID, hotelId(FK),  roomType ,  rent,  Description, status (0=>not avaialbe, 1=> available)
+    	   
+
+4. hotelBookingInfos
+------------------
+	BID(PK), customerId(FK), HID(FK), RoomId(FK), startDate, endDate, TranID(FK), status
+		
+
+
+5. Bus
+-----------------
+	Id(PK), name, CID , Description, seat_rent,   CompanyId(FK), time, dept_place, dest_place
+
+6. BusCompany
+---------------
+Id(PK), name, phone, email, address,  Description, UserId(FK)
+
+7. BusSeatInfos
+--------------
+	id(PK), SID, BusID(FK),  status (0=>booked, 1=> available)
+    	   
+
+8. SeatBookingInfos
+------------------
+	BID(PK), customerId(FK), BusID(FK), TranID(FK), status
+		
+
+
+
+9. Transactions
+----------------
+ID(PK), method(FK), amount ,date
+
+10. PaymentMethods
+-----------------
+Id, Method
+
+
+
+
+
+
+
+

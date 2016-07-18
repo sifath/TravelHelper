@@ -1,0 +1,26 @@
+﻿
+*********************************************************
+These Session Variable will set for a successfull Login
+*********************************************************
+
+
+For All Users
+-------------------------
+	Session["userid"]
+    Session["accessLevel"]     //1 => customer, 2=> Bus Owner, 3=> Hotel Owner, 9=>Admin,  //INACTIVE Account will not get privilage for login
+    Session["userName"]       // Not User Id. Just the name of the person
+	----------------------
+
+
+For Bus Company Admin
+----------------------------
+	Session["busCompanyId"]
+    Session["busName"]
+	----------------------
+
+
+For Bus Hotel Admin
+----------------------------
+	Session["hotelId"]
+    Session["hotelName"]
+	----------------------

@@ -1,0 +1,42 @@
+﻿@using Travel_Helper.Models
+@{
+    ViewBag.Title = "BookNow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hotel Book</h2>
+
+<br>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Hotel Name</th>
+                <th>Room Type</th>
+                <th>Rent</th>
+                <th>Available</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (hoteldetailinfo i in ViewBag.roomdetails)
+            {
+                <tr>
+                    <td>@i.Hotelname</td>
+                    <td>@i.type</td>
+                    <td>@i.rent</td>
+                    @{ if (i.status == 0)
+                        {
+                            <td>Active</td>
+                            <td>@Html.ActionLink("Book", "BooKing", "Hotel", new { id = @i.rID }, null)</td>
+                        }
+                        else {
+                            <td> Booked </td>
+                        }
+
+                    }
+                </tr>
+                        }
+        </tbody>
+    </table>
+</div>
